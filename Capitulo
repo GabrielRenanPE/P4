@@ -1,0 +1,38 @@
+public class Capitulo {
+    private String[] escolhas;
+    private boolean isFinal;
+
+    public Capitulo(String[] escolhas) {
+        this.escolhas = escolhas;
+        this.isFinal = (escolhas == null || escolhas.length == 0);
+    }
+
+    public void mostrar() {
+        if (isFinal) {
+            System.out.println("Fim da história!");
+        } else {
+            System.out.println("Escolha uma das opções abaixo:");
+            for (int i = 0; i < escolhas.length; i++) {
+                System.out.println((i + 1) + ". " + escolhas[i]);
+            }
+        }
+    }
+
+    public int escolher() {
+        if (isFinal) {
+            return -1;
+        } else {
+            Scanner scanner = new Scanner(System.in);
+            int escolha = -1;
+            while (escolha < 0 || escolha >= escolhas.length) {
+                System.out.print("Digite o número da sua escolha: ");
+                try {
+                    escolha = Integer.parseInt(scanner.nextLine()) - 1;
+                } catch (NumberFormatException e) {
+                    System.out.println("Digite um número válido!");
+                }
+            }
+            return escolha;
+        }
+    }
+}
